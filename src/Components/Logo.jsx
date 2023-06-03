@@ -1,9 +1,10 @@
 import styled from "@emotion/styled"
+import logo from "../assests/Logo.svg"
 
 export default function Logo() {
     return (
         <LogoWrapper >
-            <img src='./logo.svg' />
+            <img src={logo} />
             <span>Dealpit Catholic</span>
         </LogoWrapper>
     )
