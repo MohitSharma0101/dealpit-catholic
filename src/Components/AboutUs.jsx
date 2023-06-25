@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import ParentWrapper from "./ParentWrapper";
-import Image from "./Icon";
 import qualityJson from "../json/quality.json"
 import savingJson from "../json/saving.json"
 import supportJson from "../json/support.json"
@@ -36,8 +35,8 @@ export default function AboutUs() {
                 </Desc>
                 <Cards>
                     {
-                        cards.map((card) => (
-                            <Card>
+                        cards.map((card , index) => (
+                            <Card key={index}>
                                 <CardIcon>
                                     <Lottie animationData={card.icon} loop />
                                 </CardIcon>

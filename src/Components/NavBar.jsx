@@ -20,8 +20,8 @@ export default function NavBar() {
                 <Logo />
                 <Stack direction="row" spacing={4}>
                     {
-                        links.map((link) => (
-                            <NavLink onClick={(e) => {
+                        links.map((link,index) => (
+                            <NavLink key={index} onClick={(e) => {
                                 const section = document.getElementById(link.id);
                                 section.scrollIntoView({ behavior: "smooth" })
                             }}>
