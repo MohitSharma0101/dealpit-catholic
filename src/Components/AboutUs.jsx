@@ -4,6 +4,7 @@ import qualityJson from "../json/quality.json"
 import savingJson from "../json/saving.json"
 import supportJson from "../json/support.json"
 import Lottie from "lottie-react";
+import { BREAKPOINT, mq } from "../Utils/MediaQueries";
 
 export default function AboutUs() {
     const cards = [
@@ -61,6 +62,10 @@ export const Title = styled.div`
 `
 const Content = styled.div`
     padding: 30px 98px;
+
+    ${mq(BREAKPOINT.large)} {
+        padding: 30px 12px;
+    }
 `
 const Desc = styled.div`
     font-weight: 300;
@@ -72,6 +77,11 @@ const Cards = styled.div`
     justify-content: center;
     margin: 44px 0;
     gap:24px;
+    flex-wrap: wrap;
+
+    ${mq(BREAKPOINT.large)} {
+        width: 90%;
+    }
 `
 
 const Card = styled.div`

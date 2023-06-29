@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
+import { BREAKPOINT, mq } from '../Utils/MediaQueries';
 
 const ParentWrapper = styled.div`
     max-width: 80%;
     margin: 0 auto;
 
-    @media (max-width: 800px) {
+    ${mq(BREAKPOINT.large)}  {
         max-width: 100%;
-        margin: 0 24px;
+        margin: 0 12px;
     }
 `
 export default ParentWrapper;

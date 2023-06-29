@@ -3,6 +3,7 @@ import ParentWrapper from "./ParentWrapper";
 import certificateJson from "../json/verified.json"
 import Lottie from "lottie-react";
 import styled from "@emotion/styled";
+import { BREAKPOINT, mq } from "../Utils/MediaQueries";
 
 
 export default function Certification() {
@@ -13,14 +14,13 @@ export default function Certification() {
             </Title>
             <ContentWrapper>
                 <LottieWrapper>
-                <Lottie animationData={certificateJson} loop/>
+                    <Lottie animationData={certificateJson} loop />
                 </LottieWrapper>
-            
                 <Content>
-                We are pleased to inform you that <strong>Dealpit catholic is certified by government of India</strong> <br/>
-                according to the following standards and permitted to export our quality products across the world. 
-                We are well known for our quality products and our best services like on time delivery and 24×7 support service to customers.
-                 We also provide globally export service as per our customer needs and requirements.
+                    We are pleased to inform you that <strong>Dealpit catholic is certified by government of India</strong> <br />
+                    according to the following standards and permitted to export our quality products across the world.
+                    We are well known for our quality products and our best services like on time delivery and 24×7 support service to customers.
+                    We also provide globally export service as per our customer needs and requirements.
                 </Content>
             </ContentWrapper>
         </Wrapper>
@@ -43,7 +43,10 @@ const ContentWrapper = styled.div`
     border: 1px solid black;
     border-radius: 12px;
 
-
+    ${mq(BREAKPOINT.large)} {
+        flex-direction: column;
+        width: 90%;
+    }
 `
 const LottieWrapper = styled.div`
     width: 300px;
@@ -52,4 +55,8 @@ const Content = styled.div`
     width: 300px;
     font-weight: 300;
 
+    ${mq(BREAKPOINT.large)} {
+        flex-direction: column;
+        width: 90%;
+    }
 `

@@ -6,6 +6,7 @@ import { Alert, Box, Button, CircularProgress, TextField } from "@mui/material";
 import { AlternateEmail, Email, Send, Person, Phone } from "@mui/icons-material";
 import { useState } from "react";
 import Airtable from "airtable";
+import { BREAKPOINT, mq } from "../Utils/MediaQueries";
 
 export default function ContactUs() {
     const [name, setName] = useState("");
@@ -115,7 +116,6 @@ export default function ContactUs() {
                                 if(!isNaN(e.target.value)){
                                     setPhone(e.target.value);
                                 }
-                              
                             }}
                             id="phone" label="Phone number" variant="outlined" />
                     </InputWrapper>
@@ -177,22 +177,33 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 `
 
 const Content = styled.div`
+    width: 90%;
     max-width: 90%;
     padding: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    ${mq(BREAKPOINT.large)} {
+        max-width: 100%;
+        justify-content: center;
+    }
 `
 const LottieWrapper = styled.div`
     margin-left: 100px;
     width: 30%;
+
+    ${mq(BREAKPOINT.large)} {
+        display: none;
+    }
 `
 const Form = styled.div`
     width: 40%;
-    max-width: 500px;
+    min-width: 350px;
     background-color: white;
     margin: 24px;
     border-radius: 12px;
@@ -201,6 +212,10 @@ const Form = styled.div`
     display: flex;
     flex-direction: column;
     gap:18px;
+
+    ${mq(BREAKPOINT.large)} {
+        width: 90%;
+    }
 `
 
 const InputWrapper = styled.div`
