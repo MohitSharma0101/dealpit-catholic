@@ -5,8 +5,8 @@ import { Title } from "./AboutUs";
 import { Alert, Box, Button, CircularProgress, TextField } from "@mui/material";
 import { AlternateEmail, Email, Send, Person, Phone } from "@mui/icons-material";
 import { useState } from "react";
-import Airtable from "airtable";
 import { BREAKPOINT, mq } from "../Utils/MediaQueries";
+import { getCustomerTable } from "../Utils/AirtableUtils";
 
 export default function ContactUs() {
     const [name, setName] = useState("");
@@ -16,10 +16,6 @@ export default function ContactUs() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-
-    const airtableApiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
-    const customerBaseId = process.env.REACT_APP_AIRTABLE_CUSTOMER_BASE_ID;
-    const airtableBase = new Airtable({ apiKey: airtableApiKey }).base(customerBaseId);
 
     const validate = () => {
         if (!name) throw new Error("Name is missing.");
@@ -41,7 +37,7 @@ export default function ContactUs() {
         setLoading(true);
         try {
             validate();
-            airtableBase('Customers').create([
+            getCustomerTable().create([
                 {
                     "fields": {
                         "Name": name,
