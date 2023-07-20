@@ -1,7 +1,9 @@
-export default function Products() {
+import ProductCategory from "../Components/ProductCategory";
+
+export default function ProductsPage() {
     return (
         <>
-            <Products />
+        <ProductCategory />
         </>
-    )
-}
+    );
+};

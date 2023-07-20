@@ -7,40 +7,58 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from './Logo';
 import { BREAKPOINT, mq } from '../Utils/MediaQueries';
+import { NavLink } from "react-router-dom";
 
-const links = [{
-    id: "aboutus",
-    name: "About us",
-}, {
-    id: "products",
-    name: "Prodcuts"
-}, {
-    id: "contactus",
-    name: "Contact us"
-}];
+
+const links = [
+    {
+        id: "/",
+        name: "Home",
+    },
+    {
+        id: "products",
+        name: "Prodcuts"
+    },
+    {
+        id: "aboutus",
+        name: "About us",
+    }, {
+        id: "contactus",
+        name: "Contact us"
+    }
+];
 
 export default function NavBar() {
+    const getNavLinkProps = (link) => {
+        if (link.id === "contactus") return {
+            onClick:(e) => {
+                const section = document.getElementById(link.id);
+                section?.scrollIntoView({ behavior: "smooth" })
+            }
+        }
+        return {to:`${link.id}`}
+    }
     return (
         <ParentWrapper>
             <NavWrapper>
                 <Logo />
-                <NavMenuButton />
+                <NavMenuButton getNavLinkProps={getNavLinkProps} />
                 <NavLinks>
                     {
                         links.map((link) => (
-                            <NavLink key={link.id} onClick={(e) => {
-                                const section = document.getElementById(link.id);
-                                section?.scrollIntoView({ behavior: "smooth" })
-                            }}>
+                            <StyledNavLink
+                                key={link.id}
+                                {...getNavLinkProps(link)}
+                                >
                                 {link.name}
-                            </NavLink>
+                            </StyledNavLink>
                         ))
                     }
                 </NavLinks>
             </NavWrapper>
         </ParentWrapper>
-    )
-}
+    );
+};
 
 const NavWrapper = styled.nav`
     width: 100%;
@@ -48,7 +66,7 @@ const NavWrapper = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
-`
+`;
 
 const NavLinks = styled.ul`
     display: flex;
@@ -57,14 +75,15 @@ const NavLinks = styled.ul`
     ${mq(BREAKPOINT.small)} {
         display: none;
     }
-`
+`;
 
-const NavLink = styled.li`
+const StyledNavLink = styled(NavLink)`
     color:black;
     cursor: pointer;
     list-style-type: none;
     position: relative;
     padding: 8px 0;
+    text-decoration: none;
 
     &::after {
         content: '';
@@ -83,9 +102,9 @@ const NavLink = styled.li`
         transform: scaleX(1);
         transform-origin: bottom left;
     }
-`
+`;
 
-const NavMenuButton = () => {
+const NavMenuButton = ({getNavLinkProps}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -125,18 +144,23 @@ const NavMenuButton = () => {
                         <MenuItem key={link.id} onClick={(e) => {
                             onMenuClick(link);
                         }}>
-                            {link.name}
+                             <StyledNavLink
+                                key={link.id}
+                                {...getNavLinkProps(link)}
+                                >
+                                {link.name}
+                            </StyledNavLink>
                         </MenuItem>
                     ))
                 }
             </Menu>
         </MenuWrapper>
     );
-}
+};
 
 const MenuWrapper = styled.div`
     display: none;
     ${mq(BREAKPOINT.small)} {
         display: block;
     }
-`
+`;

@@ -10,36 +10,76 @@ const productsCategpryTableId = process.env.REACT_APP_AIRTABLE_PRODUCTS_CATEGORY
 
 export const getAirtableBase = () => {
     return airtableBase;
-}
+};
 
 export const getCustomerTable = () => {
     return airtableBase(customerTableId);
-}
+};
 
 export const getProductsTable = () => {
     return airtableBase(productsTableId);
-}
+};
 
 export const getProductsCategoryTable = () => {
     return airtableBase(productsCategpryTableId);
-}
+};
 
 export const useProductsCategory = () => {
     const [category, setCategory] = useState([]);
-    useEffect(()=>{
+    useEffect(() => {
         getProductsCategoryTable().select({
-            
             maxRecords: 100,
             view: "Grid view"
         }).eachPage(function page(records, fetchNextPage) {
             setCategory(records.map((record) => ({
+                id: record.id,
                 name: record.get("Name"),
-                category: "c",
                 image: record.get("Image"),
             })));
         }, function done(err) {
             if (err) { console.error(err); return; }
         })
-    },[]);
+    }, []);
     return category;
+};
+
+export const useProductsCategoryByName = (id) => {
+    const [category, setCategory] = useState();
+    useEffect(() => {
+        getProductsCategoryTable().find(id, function (err, record) {
+            if (err) { console.error(err); return; }
+            setCategory({
+                name: record.get("Name"),
+                description: record.get("Description"),
+                image: record.get("Image"),
+            });
+            console.log(record)
+        });
+    }, [id]);
+    return category;
+};
+
+export const useProductsByCategory = (category) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(()=>{
+        if(category){
+            getProductsTable().select({
+                filterByFormula: `SEARCH('${category}',{Category})`,
+                maxRecords: 100,
+                view: "Grid view"
+            }).eachPage(function page(records, fetchNextPage) {
+                setLoading(false);
+                setProducts(records.map((record) => ({
+                    id: record.id,
+                    name: record.get("Name"),
+                    image: record.get("Image"),
+                })));
+                console.log(records);
+            }, function done(err) {
+                if (err) { console.error(err); return; }
+            });
+        }
+    },[category]);
+    return [products, loading];
 };

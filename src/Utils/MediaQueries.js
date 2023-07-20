@@ -5,5 +5,9 @@ export const BREAKPOINT = {
     iphone4: 320
 };
 
-export const mq = size => `@media (max-width: ${size}px)`;
+export const QUERIES = {
+    desktopOrSmaller : "(max-width: 1024px)",
+    mobileOrSmaller : "(max-width: 520px)"
+}
 
+export const mq = size => `@media (max-width: ${size}px)`;
