@@ -1,19 +1,18 @@
 import styled from "@emotion/styled"
-import logo from "../assests/Logo.svg"
 
 export default function Logo() {
     return (
-        <LogoWrapper >
-            <img src={logo} alt="Dealpit Catholic"/>
-            <span>Dealpit Catholic</span>
+        <LogoWrapper href="/">
+            <img src={"logo512.jpg"} alt="Dealpit Catholic"/>
         </LogoWrapper>
     )
 }
 
-const LogoWrapper = styled.div`
-    width: 40px;
-    height: 40px;
+const LogoWrapper = styled.a`
+    width: 140px;
+    aspect-ratio: 16/9;
     display: flex;
     gap: 8px;
     font-weight: 600;
+    cursor: pointer;
 `

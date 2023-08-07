@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Logo from "./Logo";
 import { Facebook, LinkedIn, Twitter } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import ParentWrapper from "./ParentWrapper";
 
 export default function Footer() {
     return (
@@ -22,13 +23,14 @@ export default function Footer() {
     );
 };
 
-const Wrapper = styled.div`
-    padding: 24px;
+const Wrapper = styled(ParentWrapper)`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const Socials = styled.div`
     display: flex;
+    height: min-content;
     gap:10px;
 `;

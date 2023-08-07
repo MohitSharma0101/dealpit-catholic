@@ -17,7 +17,7 @@ const links = [
     },
     {
         id: "products",
-        name: "Prodcuts"
+        name: "Products"
     },
     {
         id: "aboutus",
