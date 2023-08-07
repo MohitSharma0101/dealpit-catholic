@@ -4,7 +4,7 @@ import logo from "../assests/Logo.svg"
 export default function Logo() {
     return (
         <LogoWrapper >
-            <img src={logo} />
+            <img src={logo} alt="Dealpit Catholic"/>
             <span>Dealpit Catholic</span>
         </LogoWrapper>
     )
