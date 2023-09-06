@@ -9,7 +9,8 @@ export default function Logo() {
 }
 
 const LogoWrapper = styled.a`
-    width: 140px;
+    width: 64px;
+    height: 64px;
     aspect-ratio: 16/9;
     display: flex;
     gap: 8px;
